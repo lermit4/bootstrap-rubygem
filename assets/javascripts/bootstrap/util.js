@@ -111,16 +111,13 @@ var Util = function ($) {
     },
     getSelectorFromElement: function getSelectorFromElement(element) {
       var selector = element.getAttribute('data-target');
-      if (!selector || selector === '#') {
+
+      if (!selector) {
         selector = element.getAttribute('href') || '';
+        selector = /^#[a-z]/i.test(selector) ? selector : null;
       }
 
-      try {
-        var $selector = $(selector);
-        return $selector.length > 0 ? selector : null;
-      } catch (error) {
-        return null;
-      }
+      return selector;
     },
     reflow: function reflow(element) {
       return element.offsetHeight;
@@ -150,3 +147,4 @@ var Util = function ($) {
 
   return Util;
 }(jQuery);
+//# sourceMappingURL=util.js.map
